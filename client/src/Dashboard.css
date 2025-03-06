@@ -1,151 +1,280 @@
 /* Import Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
 
-body {
-    background-color: #ffe6f2; /* Soft pink background */
-    font-family: 'Poppins', sans-serif;
-    color: #5a1a5b;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+/* Base styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-.App {
-    text-align: center;
-    background: white;
-    padding: 40px;
-    border-radius: 15px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    width: 350px;
+/* Main dashboard container */
+.dashboard-container {
+  width: 800px;
+  min-height: 600px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  display: flex;
+  flex-direction: column;
+  font-family: 'Roboto', sans-serif;
+  margin: 30px auto;
+  overflow: hidden;
 }
 
-h1 {
-    font-size: 24px;
-    font-weight: 600;
-    color: #ff4d94; /* Bright pink */
-    margin-bottom: 20px;
+/* Header section */
+.dashboard-header {
+  background-color: #3182ce;
+  color: white;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-/* ADDED: h2 heading style for "Verify Your Email" and dashboard headings */
-h2 {
-    font-size: 20px;
-    font-weight: 600;
-    color: #ff4d94; /* Bright pink */
-    margin-bottom: 15px;
+.dashboard-header h2 {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0;
 }
 
-/* ADDED: h3 heading style for "Hello, [name]!" in dashboard */
-h3 {
-    font-size: 18px;
-    font-weight: 600;
-    color: #ff4d94; /* Bright pink */
-    margin-bottom: 10px;
+.user-info p {
+  margin: 0;
+  text-align: right;
 }
 
-/* Form Styling */
-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.user-info .email {
+  font-size: 14px;
+  opacity: 0.8;
 }
 
-label {
-    font-size: 14px;
-    font-weight: 600;
-    margin: 10px 0 5px;
+/* Main content area */
+.dashboard-main {
+  flex: 1;
+  padding: 20px;
+  position: relative;
 }
 
-input {
-    width: 90%;
-    padding: 12px;
-    border: 2px solid #ff99c8;
-    border-radius: 10px;
-    font-size: 14px;
-    outline: none;
-    transition: all 0.3s ease-in-out;
+/* Loading indicator */
+.loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  color: #3182ce;
+  z-index: 10;
 }
 
-input:focus {
-    border-color: #ff4d94;
-    box-shadow: 0 0 8px rgba(255, 77, 148, 0.5);
+/* Search panel layout */
+.search-panel {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 20px;
+  height: 100%;
 }
 
-/* Button Styling */
-button {
-    background: linear-gradient(135deg, #ff66b2, #ff3385);
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 20px;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-    margin-top: 15px;
-    width: 100%;
+/* Search form */
+.search-form {
+  background-color: #f8fafc;
+  border-radius: 8px;
+  padding: 20px;
 }
 
-button:hover {
-    background: linear-gradient(135deg, #ff3385, #ff66b2);
-    transform: scale(1.05);
+.search-form h3 {
+  color: #3182ce;
+  margin-bottom: 20px;
+  font-size: 18px;
 }
 
-/* Message Styling */
-.success {
-    color: #00c851;
-    font-weight: bold;
-    margin-top: 15px;
+.form-group {
+  margin-bottom: 15px;
 }
 
-.error {
-    color: #ff4444;
-    font-weight: bold;
-    margin-top: 15px;
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 14px;
+  color: #4a5568;
 }
 
-/* ADDED: Generic message class for status messages */
+.form-group select,
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.search-button,
+.clear-button {
+  width: 48%;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.search-button {
+  background-color: #3182ce;
+  color: white;
+  margin-right: 4%;
+}
+
+.clear-button {
+  background-color: #e2e8f0;
+  color: #4a5568;
+}
+
+/* Results area */
+.results-area {
+  overflow-y: auto;
+  max-height: 450px;
+}
+
 .message {
-    font-weight: bold;
-    margin-top: 15px;
+  padding: 15px;
+  background-color: #f8fafc;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #4a5568;
 }
 
-/* ADDED: Dashboard Styles Section - Begin */
-/* Dashboard container */
-.dashboard {
-    text-align: center;
+.results-list h3 {
+  color: #3182ce;
+  margin-bottom: 15px;
+  font-size: 18px;
 }
 
-/* User greeting section with bottom border */
-.user-greeting {
-    margin-bottom: 20px;
-    padding-bottom: 15px;
-    border-bottom: 2px solid #ff99c8;
+.doctor-card {
+  background-color: #f8fafc;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 15px;
+  border: 1px solid #e2e8f0;
 }
 
-/* Styling for the email display in user greeting */
-.user-greeting p {
-    color: #5a1a5b;
-    font-size: 14px;
+.doctor-card h4 {
+  font-size: 16px;
+  margin-bottom: 5px;
+  color: #2d3748;
 }
 
-/* Main content area of dashboard */
-.dashboard-content {
-    min-height: 60px;
-    margin-bottom: 20px;
-    font-size: 14px;
-    color: #5a1a5b;
+.doctor-card .affiliation {
+  font-size: 14px;
+  color: #718096;
+  margin-bottom: 10px;
 }
 
-/* Special styling for logout button - red gradient */
-.logout-btn {
-    background: linear-gradient(135deg, #ff4444, #cc0000);
+.doctor-card p {
+  font-size: 14px;
+  margin-bottom: 10px;
 }
 
-/* Hover effect for logout button */
-.logout-btn:hover {
-    background: linear-gradient(135deg, #cc0000, #ff4444);
+.view-button {
+  background-color: #ebf8ff;
+  color: #3182ce;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
 }
-/* ADDED: Dashboard Styles Section - End */
+
+/* Doctor details */
+.doctor-details {
+  background-color: white;
+  border-radius: 8px;
+  padding: 20px;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.back-button {
+  background: transparent;
+  color: #3182ce;
+  border: none;
+  padding: 0;
+  margin-bottom: 20px;
+  font-size: 14px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.doctor-details h3 {
+  font-size: 20px;
+  color: #2d3748;
+  margin-bottom: 5px;
+}
+
+.doctor-details > p {
+  color: #718096;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.info-section {
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.info-section:last-child {
+  border-bottom: none;
+}
+
+.info-section h4 {
+  font-size: 16px;
+  color: #4a5568;
+  margin-bottom: 10px;
+}
+
+.info-section p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #2d3748;
+  margin-bottom: 5px;
+}
+
+/* Footer */
+.dashboard-footer {
+  padding: 20px;
+  text-align: right;
+}
+
+.logout-button {
+  background-color: #e53e3e;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+/* Responsive adjustments */
+@media (max-width: 850px) {
+  .dashboard-container {
+    width: 90%;
+  }
+}
+
+@media (max-width: 700px) {
+  .search-panel {
+    grid-template-columns: 1fr;
+  }
+  
+  .results-area {
+    max-height: none;
+  }
+}
