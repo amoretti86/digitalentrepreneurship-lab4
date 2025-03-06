@@ -1,5 +1,4 @@
-Here's the code for the README.md file for easy copying:
-markdownCopy# Doctor Finder Application
+# Doctor Finder Application
 
 This project transforms a simple registration application into a fully functional doctor finding application that allows users to search for doctors by specialty, insurance coverage, and location.
 
